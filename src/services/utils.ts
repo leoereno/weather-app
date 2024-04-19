@@ -1,0 +1,1 @@
+export const celsiusToF = (celsius:number) => Math.round((celsius * 9/5 + 32));
