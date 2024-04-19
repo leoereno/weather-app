@@ -1,8 +1,7 @@
 import { IoLocationOutline } from "react-icons/io5";
 import { getWeather } from "../../services/api";
 import { ICoordinates } from "../../interfaces/ICoordinates/ICoordinates";
-import { useContext, useEffect } from "react";
-import { Forecast, ForecastContext, useForecastContext } from "../../context/ForecastContext";
+import { Forecast, useForecastContext } from "../../context/ForecastContext";
 import { useLoadingContext } from "../../context/loading-context";
 import { getEmoji } from "../../services/emoji";
 import { celsiusToF } from "../../services/utils";
@@ -26,6 +25,9 @@ async function getUserLocation (
                 emoji: emoji,
                 fahrenheit: celsiusToF(forecastResponse.hourly.temperature_2m[currentHour])
             });
+            setIsLoading(false);
+        }, () => {
+            alert("Please allow geolocation service access!");
             setIsLoading(false);
         }
     );

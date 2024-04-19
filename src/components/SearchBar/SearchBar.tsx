@@ -22,6 +22,11 @@ export default function SearchBar(){
       return;
     } 
     const coords = await getCityCoords(inputText);
+    if(!coords || coords.length < 1) {
+      alert("Please type in a valid city name!");
+      loading.setIsLoading(false);
+      return;
+    }
     const weather = await getWeather({latitude: coords[0].lat, longitude: coords[0].lon});
     const currentHour = new Date().getHours();
     const emoji = getEmoji(Number(weather.hourly.weather_code[currentHour]), currentHour);
